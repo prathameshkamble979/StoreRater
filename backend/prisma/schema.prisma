@@ -1,0 +1,78 @@
+// This is your Prisma schema file
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  NORMAL
+  STORE_OWNER
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String   @db.VarChar(60)
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @db.VarChar(255)
+  address      String?  @db.VarChar(400)
+  role         Role     @default(NORMAL)
+  
+  // Relations
+  store        Store?   // A user can own one store (if STORE_OWNER)
+  ratings      Rating[] // A user can submit multiple ratings
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Store {
+  id            String   @id @default(uuid())
+  name          String   @db.VarChar(255)
+  email         String   @unique @db.VarChar(255)
+  address       String   @db.VarChar(400)
+  
+  // Denormalized rating counters
+  averageRating Decimal  @default(0.00) @db.Decimal(3, 2)
+  totalRatings  Int      @default(0)
+
+  // Relation to Owner
+  ownerId       String   @unique
+  owner         User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  // Relation to Ratings
+  ratings       Rating[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([name])
+}
+
+model Rating {
+  id        String   @id @default(uuid())
+  rating    Int      @db.SmallInt
+  
+  // Relations
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  storeId   String
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Prevent duplicate ratings
+  @@unique([userId, storeId])
+  
+  // Performance indexes
+  @@index([storeId])
+  @@index([userId])
+}
