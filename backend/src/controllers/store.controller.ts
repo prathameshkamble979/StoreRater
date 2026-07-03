@@ -55,7 +55,7 @@ export const getStores = async (req: AuthRequest, res: Response) => {
 
 export const getStoreDetails = async (req: AuthRequest, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     const userId = req.user?.userId;
 
     const store = await prisma.store.findUnique({

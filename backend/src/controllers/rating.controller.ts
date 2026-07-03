@@ -4,7 +4,7 @@ import { AuthRequest } from '../middlewares/auth.middleware';
 
 export const submitRating = async (req: AuthRequest, res: Response) => {
   try {
-    const { storeId } = req.params;
+    const storeId = req.params.storeId as string;
     const { rating } = req.body; // expected 1-5
     const userId = req.user?.userId;
 
