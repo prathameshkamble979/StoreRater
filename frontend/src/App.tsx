@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children, allowedRoles }: { children: JSX.Element, all
   if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><Spinner /></div>;
   
   if (!user) {
-    return <Unauthorized />;
+    return <Navigate to="/login" replace />;
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
