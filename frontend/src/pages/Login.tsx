@@ -17,6 +17,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [errorMsg, setErrorMsg] = React.useState('');
+  const [showDemo, setShowDemo] = React.useState(false);
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema)
@@ -93,23 +94,37 @@ export const Login = () => {
           Don't have an account? <Link to="/register" className="text-gray-900 font-medium hover:underline">Register here</Link>
         </p>
 
-        {/* Demo Credentials Hint */}
-        <div className="mt-8 pt-6 border-t border-gray-100">
-          <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-3">Demo Credentials (Password: DemoPassword123!)</p>
-          <div className="space-y-2 text-sm text-gray-600">
-            <div className="flex justify-between">
-              <span>Admin:</span>
-              <span className="font-mono text-gray-900">admin@platform.com</span>
+        {/* Demo Credentials Collapsible */}
+        <div className="mt-8 border border-gray-200 rounded-md bg-gray-50 overflow-hidden">
+          <button 
+            type="button"
+            onClick={() => setShowDemo(!showDemo)}
+            className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+          >
+            <span>Demo Accounts for Review</span>
+            <span>{showDemo ? '▲' : '▼'}</span>
+          </button>
+          
+          {showDemo && (
+            <div className="px-3 pb-3 pt-1 border-t border-gray-200 text-xs text-gray-600 space-y-2">
+              <div className="flex justify-between">
+                <span>Admin</span>
+                <span className="font-mono text-gray-800">admin@platform.com</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Store Owner</span>
+                <span className="font-mono text-gray-800">owner1@coffee.com</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Normal User</span>
+                <span className="font-mono text-gray-800">user1@gmail.com</span>
+              </div>
+              <div className="pt-2 mt-2 border-t border-gray-200 flex justify-between font-medium">
+                <span>Password:</span>
+                <span className="font-mono text-gray-800">DemoPassword123!</span>
+              </div>
             </div>
-            <div className="flex justify-between">
-              <span>Store Owner:</span>
-              <span className="font-mono text-gray-900">owner1@coffee.com</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Normal User:</span>
-              <span className="font-mono text-gray-900">user1@gmail.com</span>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
