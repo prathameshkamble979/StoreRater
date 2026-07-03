@@ -92,6 +92,25 @@ export const Login = () => {
         <p className="mt-6 text-center text-sm text-gray-500">
           Don't have an account? <Link to="/register" className="text-gray-900 font-medium hover:underline">Register here</Link>
         </p>
+
+        {/* Demo Credentials Hint */}
+        <div className="mt-8 pt-6 border-t border-gray-100">
+          <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-3">Demo Credentials (Password: DemoPassword123!)</p>
+          <div className="space-y-2 text-sm text-gray-600">
+            <div className="flex justify-between">
+              <span>Admin:</span>
+              <span className="font-mono text-gray-900">admin@platform.com</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Store Owner:</span>
+              <span className="font-mono text-gray-900">owner1@coffee.com</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Normal User:</span>
+              <span className="font-mono text-gray-900">user1@gmail.com</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

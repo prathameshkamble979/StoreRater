@@ -34,7 +34,19 @@ This project is organized as a monorepo:
 2. Install dependencies: `npm install`
 3. Start the Vite development server: `npm run dev` (Runs on http://localhost:5173)
 
-## Default Admin Credentials
-If a seed script was run, you can log in as an admin using:
+## Demo Credentials
+
+The database has been seeded with demo accounts for easy testing. All accounts use the same password.
+
+**Password for all accounts:** `DemoPassword123!`
+
+### System Administrator
 - **Email:** `admin@platform.com`
-- **Password:** `AdminPassword123!`
+
+### Store Owners
+- **Email:** `owner1@coffee.com`
+- **Email:** `owner2@books.com`
+
+### Normal Users
+- **Email:** `user1@gmail.com`
+- **Email:** `user2@gmail.com`
