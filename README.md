@@ -2,6 +2,10 @@
 
 A full-stack role-based Store Rating dashboard application built with the PERN/MERN-style stack (MySQL, Express, React, Node.js) and Prisma ORM.
 
+## Live Deployment
+- **Frontend (Live Site):** [https://store-rater-nu.vercel.app](https://store-rater-nu.vercel.app)
+- **Backend API:** [https://storerater-yke3.onrender.com](https://storerater-yke3.onrender.com)
+
 ## Architecture
 
 This project is organized as a monorepo:
